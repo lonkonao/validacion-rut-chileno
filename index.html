@@ -2,100 +2,39 @@
 <html lang="es">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
   <title>validacion rut chileno</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/landing-page.min.css" rel="stylesheet">
-
 </head>
 
 <body>
+  <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+    <h1 class="mb-2">Ingrese para validar</h1>
+    <form action="">
+      <input type="text" id="rut" name="rut" oninput="checkRut(this)" class="form-control form-control-lg"
+        placeholder="12345678-9">
+      <button type="submit" class="btn btn-block btn-lg btn-primary">rut</button>
+    </form>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-light static-top" style="background-color: #7b5aa1">
-    <div class="container">
+  </div>
 
-      
-
-    </div>
-  </nav>
-
-  <!-- Masthead -->
-  <header class="masthead></div>
-    <div class="container">
-      <div class="row">
-        
-
-
-<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form method="" action="">
-              <!-- Default switch -->
-
-              
-            
-          <h1 class="mb-2">Ingrese su RUT</h1>
-        </div>
-            <div class="form-row">
-              <div class="col-12 col-md-9 mb-2 mb-md-0">
-                <input type="text" id="rut" name="rut"  oninput="checkRut(this)" class="form-control form-control-lg" placeholder="12345678-9">
-              </div>
-
-
-              <div class="col-12 col-md-3">
-                <button type="submit" class="btn btn-block btn-lg btn-primary">rut</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-
-
-  <!-- Footer -->
-  
-  <!-- Load Facebook SDK for JavaScript -->
-  
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
     function checkRut(rut) {
-     
-      var valor = rut.value.replace('.','');
-      valor = valor.replace('-','');
-      cuerpo = valor.slice(0,-1);
-      dv = valor.slice(-1).toUpperCase();
-      rut.value = cuerpo + '-'+ dv
-      if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+      var dato = rut.value.replace('.', '');
+      dato = dato.replace('-', '');
+      cuerpo = dato.slice(0, -1);
+      dv = dato.slice(-1).toUpperCase();
+      rut.value = cuerpo + '-' + dv
+      if (cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false; }
       suma = 0;
       multiplo = 2;
-      for(i=1;i<=cuerpo.length;i++) {
-        index = multiplo * valor.charAt(cuerpo.length - i);
+      for (i = 1; i <= cuerpo.length; i++) {
+        index = multiplo * dato.charAt(cuerpo.length - i);
         suma = suma + index;
-        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+        if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
       }
       dvEsperado = 11 - (suma % 11);
-      dv = (dv == 'K')?10:dv;
-      dv = (dv == 0)?11:dv;
-    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
-      rut.setCustomValidity('');
+      dv = (dv == 'K') ? 10 : dv;
+      dv = (dv == 0) ? 11 : dv;
+      if (dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+      rut.setCustomValidity('Rut Valido');
     }
   </script>
